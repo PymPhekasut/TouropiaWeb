@@ -6,7 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
-const compression = 'compression';
+//const compression = 'compression';
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -70,7 +70,7 @@ app.use(
 //   next();
 // });
 
-app.use(compression());
+//app.use(compression());
 
 //Testing Middleware
 app.use((req, res, next) => {
