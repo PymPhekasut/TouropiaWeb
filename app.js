@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = 'compression';
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -36,8 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
-  message:
-    'Too many requests from this IP, please try again in an hour',
+  message: 'Too many requests from this IP, please try again in an hour',
 });
 app.use('/api', limiter);
 
@@ -70,6 +70,8 @@ app.use(
 //   next();
 // });
 
+app.use(compression());
+
 //Testing Middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
@@ -93,9 +95,7 @@ app.use('/api/v1/bookings', bookingRouter);
 
 //all http methods
 app.all('*', (req, res, next) => {
-  next(
-    new AppError(`Can't find ${req.originalUrl} on this server!`, 404)
-  );
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 // const err = new Error(`Cannot find ${req.originalUrl} on this server!`);
 // err.status = 'fail';
