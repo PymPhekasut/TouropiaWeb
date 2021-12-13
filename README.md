@@ -59,5 +59,4 @@ I have studied this project through Jonas's Bootcamp with more than 60 hours to 
 >Git and GitHub crash course
 
 
-Thank you to Jonas Schmidtmann
 
